@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -8,13 +8,12 @@ import { PostType } from './utils/types';
 import './App.css'
 
 function App() {
-  const [nextPageIdx, setNextPageIdx] = useState(1)
   const [ref, inView, entry] = useInView()
   const [posts, setPosts] = useState([])
   const { fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
-    async ({ pageParam = 5 }) => {
-      const res = await HttpInstance.getInfinitePosts(nextPageIdx, 10)
+    async ({ pageParam = 0 }) => {
+      const res = await HttpInstance.getInfinitePosts(pageParam, 10)
       return {
         result: res,
         nextPage: pageParam,
@@ -27,13 +26,12 @@ function App() {
         return undefined;
       },
       onSuccess: (data) => {
-        setNextPageIdx((beforeIdx) => beforeIdx + 10)
-        func(data.pages)
+        flatPosts(data.pages)
       }
     }
   )
 
-  const func = (data: any) => {
+  const flatPosts = (data: any) => {
     setPosts(data?.flatMap(({ result }: any) => {
       const data = result?.data
       return data
@@ -52,7 +50,7 @@ function App() {
       <div className="post-wrapper">
         {
           posts.map(({ id, title, userId, body }: PostType) =>
-            <Post id={id} title={title} userId={userId} body={body} />
+            <Post key={id} id={id} title={title} userId={userId} body={body} />
           )
         }
         <div ref={ref}></div>
