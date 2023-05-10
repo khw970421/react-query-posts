@@ -23,11 +23,15 @@ class HttpClient {
   }
 
   getPosts(postId: string) {
-    return this.axios.get(`/posts/${postId}`)
+    return this.axios.get(`/posts/${postId}`).then(res => res.data)
+  }
+
+  getInfinitePosts(start: number, limit: number) {
+    return this.axios.get(`/posts?_start=${start}&_limit=${limit}`).then(res => res.data)
   }
 
   getComments(postId: string) {
-    return this.axios.get(`comments?postId${postId}`)
+    return this.axios.get(`comments?postId${postId}`).then(res => res.data)
   }
 }
 
