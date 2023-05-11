@@ -1,5 +1,6 @@
 import { PostType } from '../../utils/types';
 import Post from './Post';
+import './GridPost.scss'
 
 const GridPosts = ({ posts, bottomRef }: { posts: PostType[], bottomRef: any }) => {
   return (

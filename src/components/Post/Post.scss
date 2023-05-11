@@ -1,5 +1,6 @@
 .post {
   &-wrapper {
+    width: 25rem;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 2px 3px 5px 0px;
@@ -18,5 +19,6 @@
 
   &-section {
     margin: 2rem;
+    white-space: wrap;
   }
 }
