@@ -12,7 +12,7 @@ function App() {
   const [posts, setPosts] = useState([])
   const { fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
-    async ({ pageParam = 0 }) => {
+    async ({ pageParam = 1 }) => {
       const res = await HttpInstance.getInfinitePosts(pageParam, 10)
       return {
         result: res,
@@ -22,7 +22,7 @@ function App() {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (lastPage.isLast >= lastPage.nextPage + 10) return lastPage.nextPage + 10;
+        if (lastPage.isLast > lastPage.nextPage + 10) return lastPage.nextPage + 10;
         return undefined;
       },
       onSuccess: (data) => {
