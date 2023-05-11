@@ -3,9 +3,9 @@ import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import HttpInstance from './api/user';
-import Post from './components/Post';
+import Post from './components/Post/Post';
 import { PagesPostType, PostType } from './utils/types';
-import './App.css'
+// import './App.css'
 import { pagePerLimitPosts } from './utils/const';
 
 
@@ -45,7 +45,7 @@ function App() {
   return (
     <>
       <h3>Posts</h3>
-      <div className="post-wrapper">
+      <div className="posts-wrapper">
         {
           posts.map(({ id, title, userId, body }: PostType) =>
             <Post key={id} id={id} title={title} userId={userId} body={body} />
