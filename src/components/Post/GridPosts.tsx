@@ -11,7 +11,7 @@ const GridPosts = ({ posts, bottomRef, isFetching }: { posts: PostType[], bottom
           <Post key={id} id={id} title={title} userId={userId} body={body} />
         )
       }
-      {isFetching && Array(7).fill(0).map(_ => <SkeletonPost />)}
+      {isFetching && Array(7).fill(0).map((_, idx) => <SkeletonPost key={idx} />)}
       <div ref={bottomRef} style={{ height: "0.5rem" }}></div>
     </div >
   );
