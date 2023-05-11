@@ -32,7 +32,8 @@ function App() {
         setPosts(pages.flatMap(({ data }: { data: PostType[] }) => {
           return data
         }))
-      }
+      },
+      refetchOnWindowFocus: false
     }
   )
 
