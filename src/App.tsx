@@ -6,6 +6,7 @@ import HttpInstance from './api/user';
 import Post from './components/Post';
 import { PostType } from './utils/types';
 import './App.css'
+import { pagePerLimitPosts } from './utils/const';
 
 function App() {
   const [ref, inView, entry] = useInView()
@@ -13,7 +14,7 @@ function App() {
   const { fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
     async ({ pageParam = 1 }) => {
-      const res = await HttpInstance.getInfinitePosts(pageParam, 10)
+      const res = await HttpInstance.getInfinitePosts(pageParam, pagePerLimitPosts)
       return {
         result: res,
         nextPage: pageParam,
@@ -22,7 +23,8 @@ function App() {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (lastPage.isLast > lastPage.nextPage + 10) return lastPage.nextPage + 10;
+        if (lastPage.isLast > lastPage.nextPage + pagePerLimitPosts)
+          return lastPage.nextPage + pagePerLimitPosts;
         return undefined;
       },
       onSuccess: (data) => {
