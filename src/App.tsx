@@ -4,19 +4,20 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import HttpInstance from './api/user';
 import Post from './components/Post';
-import { PostType } from './utils/types';
+import { PagesPostType, PostType } from './utils/types';
 import './App.css'
 import { pagePerLimitPosts } from './utils/const';
 
+
 function App() {
   const [ref, inView, entry] = useInView()
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<PostType[]>([])
   const { fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
     async ({ pageParam = 1 }) => {
       const res = await HttpInstance.getInfinitePosts(pageParam, pagePerLimitPosts)
       return {
-        result: res,
+        data: res.data,
         nextPage: pageParam,
         isLast: Number(res.headers["x-total-count"])
       };
@@ -27,18 +28,13 @@ function App() {
           return lastPage.nextPage + pagePerLimitPosts;
         return undefined;
       },
-      onSuccess: (data) => {
-        flatPosts(data.pages)
+      onSuccess: ({ pages }: { pages: PagesPostType[] }) => {
+        setPosts(pages.flatMap(({ data }: { data: PostType[] }) => {
+          return data
+        }))
       }
     }
   )
-
-  const flatPosts = (data: any) => {
-    setPosts(data?.flatMap(({ result }: any) => {
-      const data = result?.data
-      return data
-    }))
-  }
 
   useEffect(() => {
     if (inView && hasNextPage) {
