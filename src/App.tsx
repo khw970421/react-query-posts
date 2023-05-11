@@ -1,33 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+import HttpInstance from './api/user';
+import Post from './components/Post';
+import { PagesPostType, PostType } from './utils/types';
 import './App.css'
+import { pagePerLimitPosts } from './utils/const';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ref, inView, entry] = useInView()
+  const [posts, setPosts] = useState<PostType[]>([])
+  const { fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ['infinitePerson'],
+    async ({ pageParam = 1 }) => {
+      const res = await HttpInstance.getInfinitePosts(pageParam, pagePerLimitPosts)
+      return {
+        data: res.data,
+        nextPage: pageParam,
+        isLast: Number(res.headers["x-total-count"])
+      };
+    },
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.isLast > lastPage.nextPage + pagePerLimitPosts)
+          return lastPage.nextPage + pagePerLimitPosts;
+        return undefined;
+      },
+      onSuccess: ({ pages }: { pages: PagesPostType[] }) => {
+        setPosts(pages.flatMap(({ data }: { data: PostType[] }) => {
+          return data
+        }))
+      }
+    }
+  )
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage()
+    }
+  }, [inView, entry?.target])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h3>Posts</h3>
+      <div className="post-wrapper">
+        {
+          posts.map(({ id, title, userId, body }: PostType) =>
+            <Post key={id} id={id} title={title} userId={userId} body={body} />
+          )
+        }
+        <div ref={ref}></div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
