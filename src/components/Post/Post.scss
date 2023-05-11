@@ -1,0 +1,22 @@
+.post {
+  &-wrapper {
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 2px 3px 5px 0px;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    title,
+    div {
+      margin: 2rem;
+    }
+  }
+
+  &-section {
+    margin: 2rem;
+  }
+}
