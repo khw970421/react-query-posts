@@ -11,14 +11,18 @@
     justify-content: space-between;
     align-items: center;
 
-    title,
-    div {
+    .post-title {
+      width: 80%;
+      margin: 2rem;
+    }
+    .post-user {
+      width: 20%;
       margin: 2rem;
     }
   }
 
   &-section {
     margin: 2rem;
-    white-space: wrap;
+    -webkit-line-clamp: 3;
   }
 }

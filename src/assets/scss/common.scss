@@ -3,3 +3,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.text-multi-line-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

@@ -6,10 +6,10 @@ const Post = (props: PostType) => {
   return (
     <div className="post-wrapper">
       <header className="post-header">
-        <div className="text-ellipsis">{title}</div>
-        <div className="text-ellipsis">{userId}</div>
+        <div className="text-ellipsis post-title">{title}</div>
+        <div className="text-ellipsis post-user">{userId}</div>
       </header>
-      <section className="post-section text-ellipsis">{body}</section>
+      <section className="post-section text-multi-line-ellipsis">{body}</section>
     </div>
   );
 };
