@@ -4,7 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import HttpInstance from './api/user';
 import { PagesPostType, PostType } from './utils/types';
-// import './App.css'
+import './App.css'
 import { pagePerLimitPosts } from './utils/const';
 import GridPosts from './components/Post/GridPosts';
 
@@ -43,10 +43,10 @@ function App() {
     }
   }, [inView, entry?.target])
   return (
-    <>
+    <div className="app-wrapper">
       <h3>Posts</h3>
       <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} />
-    </>
+    </div>
   )
 }
 
