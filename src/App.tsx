@@ -12,7 +12,7 @@ import GridPosts from './components/Post/GridPosts';
 function App() {
   const [ref, inView, entry] = useInView()
   const [posts, setPosts] = useState<PostType[]>([])
-  const { fetchNextPage, hasNextPage } = useInfiniteQuery(
+  const { isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
     async ({ pageParam = 1 }) => {
       const res = await HttpInstance.getInfinitePosts(pageParam, pagePerLimitPosts)
@@ -32,7 +32,8 @@ function App() {
         setPosts(pages.flatMap(({ data }: { data: PostType[] }) => {
           return data
         }))
-      }
+      },
+      refetchOnWindowFocus: false
     }
   )
 
@@ -44,7 +45,7 @@ function App() {
   return (
     <>
       <h3>Posts</h3>
-      <GridPosts posts={posts} bottomRef={ref} />
+      <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} />
     </>
   )
 }
