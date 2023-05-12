@@ -6,6 +6,9 @@
 </div>
 
 JSONPlaceholder API를 활용하여 react-query의 무한스크롤 구현 및 적용
+![ezgif com-video-to-gif](https://github.com/khw970421/react-query-posts/assets/59253551/d33dbbee-7c45-4a6d-8f8a-5bf3e62ae4e8)
+
+
 
 ## [배포](https://react-query-posts.vercel.app/)
 
