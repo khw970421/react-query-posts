@@ -24,7 +24,7 @@
 
 .skeleton-post {
   &-wrapper {
-    width: 25rem;
+    width: calc(25rem - 2rem);
     display: flex;
     flex-direction: column;
     gap: 1rem;
