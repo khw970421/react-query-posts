@@ -14,9 +14,12 @@ JSONPlaceholder API를 활용하여 react-query의 무한스크롤 구현 및 �
 
 ## 기능구현
 
-1. React-Query useInfiniteQuery를 활용한 무한스크롤 처리
+1. [React-Query useInfiniteQuery를 활용한 무한스크롤 처리](https://github.com/khw970421/react-query-posts/pull/4)
 1. Post 컴포넌트 기능 구현
 1. Post 컴포넌트를 포함하는 GridPost 컴포넌트 기능 구현
    1. media-query로 반응형 처리
    2. Skeleton-Post 적용
 1. SkeletonPost 컴포넌트 기능 구현
+
+## 추가처리 
+1. [타입 any를 알맞은 타입으로 수정](https://github.com/khw970421/react-query-posts/pull/4)
