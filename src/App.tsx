@@ -7,6 +7,7 @@ import { PagesPostType, PostType } from './utils/types';
 import './App.css'
 import { pagePerLimitPosts } from './utils/const';
 import GridPosts from './components/Post/GridPosts';
+import ButtomSheet from './components/BottomSheet/ButtonSheet';
 import Comments from './components/Comment/Comments';
 
 
@@ -14,6 +15,7 @@ function App() {
   const [ref, inView, entry] = useInView()
   const [posts, setPosts] = useState<PostType[]>([])
   const [selectedPostId, setSelectedPostId] = useState<string>('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['infinitePerson'],
@@ -44,7 +46,10 @@ function App() {
     const comments = await HttpInstance.getComments(`${selectedPostId}`)
     return comments.data
   }, {
-    enabled: !!selectedPostId
+    enabled: !!selectedPostId,
+    onSuccess: () => {
+      setIsModalOpen(true)
+    }
   }
   )
 
@@ -59,15 +64,29 @@ function App() {
   }
 
   useEffect(() => {
-    refetch()
+    if (selectedPostId)
+      refetch()
   }, [selectedPostId])
+
+  const handleCloseButtonSheet = () => {
+    setIsModalOpen(false)
+  }
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isModalOpen])
 
   return (
     <div className="app-wrapper">
-      <h3>Posts</h3>
-      <Comments comments={comments || []} />
+      {<ButtomSheet className={isModalOpen && 'open'} closeButtonSheet={handleCloseButtonSheet}>
+        <Comments comments={comments || []} />
+      </ButtomSheet>
+      }
       <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} clickSelectedPostId={handleSelectedPostId} />
-
     </div>
   )
 }
