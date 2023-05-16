@@ -10,3 +10,14 @@ export type PagesPostType = {
   nextPage: number
   isLast: number
 }
+
+export type CommentType = {
+  name: string
+  body: string
+}
+
+export type CommentsType = {
+  comments: (CommentType & {
+    id: number
+  })[]
+}
