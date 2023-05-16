@@ -1,10 +1,10 @@
-import { PostType } from '../../utils/types';
+import { PostProps } from '../../utils/types';
 import './Post.scss'
 
-const Post = (props: PostType) => {
-  const { userId, title, body } = props
+const Post = (props: PostProps) => {
+  const { userId, title, body, id, clickSelectedPostId } = props
   return (
-    <div className="post-wrapper hover-float">
+    <div className="post-wrapper hover-float" onClick={() => clickSelectedPostId(id)}>
       <header className="post-header">
         <div className="text-ellipsis post-title">{title}</div>
         <div className="text-ellipsis post-user">{userId}</div>

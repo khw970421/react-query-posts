@@ -31,7 +31,7 @@ class HttpClient {
   }
 
   getComments(postId: string) {
-    return this.axios.get(`comments?postId${postId}`)
+    return this.axios.get(`comments?postId=${postId}`)
   }
 }
 
