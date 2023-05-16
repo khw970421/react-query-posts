@@ -80,14 +80,13 @@ function App() {
     }
   }, [isModalOpen])
 
-  console.log(isModalOpen)
   return (
     <div className="app-wrapper">
-      {<ButtomSheet className={isModalOpen && 'open'} closePopup={handleCloseButtonSheet}>
+      {<ButtomSheet className={isModalOpen && 'open'} closeButtonSheet={handleCloseButtonSheet}>
         <Comments comments={comments || []} />
       </ButtomSheet>
       }
-      <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} clickSelectedPostId={handleSelectedPostId} comments={comments} isModalOpen={isModalOpen} />
+      <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} clickSelectedPostId={handleSelectedPostId} />
     </div>
   )
 }
