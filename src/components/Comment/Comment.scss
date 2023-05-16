@@ -1,0 +1,15 @@
+.comment {
+  &-wrapper {
+    padding: 1rem;
+  }
+
+  &-header {
+    div {
+      font-weight: bold;
+    }
+  }
+
+  &-section {
+    -webkit-line-clamp: 3;
+  }
+}
