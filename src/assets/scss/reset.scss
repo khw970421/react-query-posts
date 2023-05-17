@@ -1,6 +1,9 @@
 @import './color.scss';
+@import './mixin.scss';
 
 * {
   background-color: $main-background;
   color: $main-text;
+
+  @include scroll-style-none;
 }

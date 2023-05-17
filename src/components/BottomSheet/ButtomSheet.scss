@@ -1,5 +1,3 @@
-@import '../../assets/scss/mixin.scss';
-
 .bottom-sheet {
   &-wrapper {
     position: fixed;
@@ -28,7 +26,5 @@
   &-content {
     height: 100%;
     overflow-y: auto;
-
-    @include scroll-style-none;
   }
 }
