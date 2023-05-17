@@ -1,0 +1,6 @@
+@mixin scroll-style-none {
+  scrollbar-width: none; /* FireFox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}

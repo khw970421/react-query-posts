@@ -1,0 +1,28 @@
+.post {
+  &-wrapper {
+    width: 25rem;
+    box-shadow: 2px 3px 5px 0px;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .post-title {
+      width: 80%;
+      margin: 2rem;
+      font-weight: bold;
+    }
+    .post-user {
+      width: 20%;
+      margin: 2rem;
+      text-align: center;
+    }
+  }
+
+  &-section {
+    margin: 2rem;
+    -webkit-line-clamp: 3;
+  }
+}
