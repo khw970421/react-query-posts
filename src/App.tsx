@@ -82,7 +82,7 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      {<ButtomSheet className={isModalOpen && 'open'} closeButtonSheet={handleCloseButtonSheet}>
+      {<ButtomSheet className={isModalOpen ? 'open' : ''} closeButtonSheet={handleCloseButtonSheet}>
         <Comments comments={comments || []} />
       </ButtomSheet>
       }
