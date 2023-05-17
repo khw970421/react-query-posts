@@ -3,6 +3,7 @@
 .bottom-sheet {
   // wrapper = background + container
   &-wrapper {
+    z-index: 10;
     position: fixed;
     bottom: 0;
     left: 0;
