@@ -7,3 +7,14 @@
 
   @include scroll-style-none;
 }
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}

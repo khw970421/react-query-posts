@@ -1,3 +1,5 @@
+@import '../../assets/scss/color.scss';
+
 .bottom-sheet {
   &-wrapper {
     position: fixed;
@@ -21,6 +23,10 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+
+    button {
+      background-color: $main-background;
+    }
   }
 
   &-content {
