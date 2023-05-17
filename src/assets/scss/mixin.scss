@@ -1,20 +1,6 @@
-$desktop: 1024px;
-$tablet: 768px;
-
-@mixin desktop {
-  @media screen and (min-width: #{$desktop+1}) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media screen and (max-width: #{$desktop}) {
-    @content;
-  }
-}
-
-@mixin mobile {
-  @media screen and (max-width: #{$tablet}) {
-    @content;
+@mixin scroll-style-none {
+  scrollbar-width: none; /* FireFox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 }
