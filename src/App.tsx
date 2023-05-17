@@ -70,6 +70,7 @@ function App() {
 
   const handleCloseButtonSheet = () => {
     setIsModalOpen(false)
+    setSelectedPostId('')
   }
 
   useEffect(() => {
