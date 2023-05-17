@@ -20,6 +20,8 @@
   }
 
   &-header {
+    height: 4rem;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,7 +38,7 @@
   }
 
   &-content {
-    height: 100%;
+    height: calc(100% - 4rem);
     overflow-y: auto;
   }
 }
