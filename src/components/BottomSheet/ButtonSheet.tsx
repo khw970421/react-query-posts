@@ -1,7 +1,13 @@
 import './ButtomSheet.scss'
 
-const ButtonSheet = ({ children, className, closeButtonSheet }: any) => {
+interface ButtonSheetProps {
+  children: React.ReactNode;
+  className: string;
+  closeButtonSheet: () => void
+}
 
+const ButtonSheet = (props: ButtonSheetProps) => {
+  const { children, className, closeButtonSheet } = props
   return (
     <div className={`bottom-sheet-wrapper ${className}`}>
       <div className="bottom-sheet-content">
