@@ -6,6 +6,8 @@ import HttpInstance from './api/user';
 import { PagesPostType, PostType } from './utils/types';
 import './App.css'
 import { pagePerLimitPosts } from './utils/const';
+import { isSelectedId } from './utils/function';
+
 import GridPosts from './components/Post/GridPosts';
 import ButtomSheet from './components/BottomSheet/ButtonSheet';
 import Comments from './components/Comment/Comments';
@@ -14,7 +16,7 @@ import Comments from './components/Comment/Comments';
 function App() {
   const [ref, inView, entry] = useInView()
   const [posts, setPosts] = useState<PostType[]>([])
-  const [selectedPostId, setSelectedPostId] = useState<string>('')
+  const [selectedPostId, setSelectedPostId] = useState<number>(-1)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
@@ -43,10 +45,10 @@ function App() {
   )
 
   const { data: comments, refetch } = useQuery(['comments'], async () => {
-    const comments = await HttpInstance.getComments(`${selectedPostId}`)
+    const comments = await HttpInstance.getComments(selectedPostId)
     return comments.data
   }, {
-    enabled: !!selectedPostId,
+    enabled: isSelectedId(selectedPostId),
     onSuccess: () => {
       setIsModalOpen(true)
     }
@@ -59,18 +61,19 @@ function App() {
     }
   }, [inView, entry?.target])
 
-  const handleSelectedPostId = (postId: string) => {
+  const handleSelectedPostId = (postId: number) => {
     setSelectedPostId(() => postId)
   }
 
   useEffect(() => {
-    if (selectedPostId)
+    if (isSelectedId(selectedPostId)) {
       refetch()
+    }
   }, [selectedPostId])
 
   const handleCloseButtonSheet = () => {
     setIsModalOpen(false)
-    setSelectedPostId('')
+    setSelectedPostId(-1)
   }
 
   useEffect(() => {
