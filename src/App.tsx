@@ -44,14 +44,12 @@ function App() {
     }
   )
 
-  const { data: comments, refetch } = useQuery(['comments'], async () => {
+  const { data: comments } = useQuery(['comments', selectedPostId], async () => {
     const comments = await HttpInstance.getComments(selectedPostId)
     return comments.data
   }, {
     enabled: isSelectedId(selectedPostId),
-    onSuccess: () => {
-      setIsModalOpen(true)
-    }
+    staleTime: Infinity
   }
   )
 
@@ -63,17 +61,11 @@ function App() {
 
   const handleSelectedPostId = (postId: number) => {
     setSelectedPostId(() => postId)
+    setIsModalOpen(true)
   }
-
-  useEffect(() => {
-    if (isSelectedId(selectedPostId)) {
-      refetch()
-    }
-  }, [selectedPostId])
 
   const handleCloseButtonSheet = () => {
     setIsModalOpen(false)
-    setSelectedPostId(-1)
   }
 
   useEffect(() => {
@@ -92,6 +84,7 @@ function App() {
       }
       <GridPosts posts={posts} bottomRef={ref} isFetching={isFetching} clickSelectedPostId={handleSelectedPostId} />
     </div>
+
   )
 }
 
