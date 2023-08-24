@@ -3,7 +3,7 @@ import Post from './Post';
 import './GridPost.scss'
 import SkeletonPost from '../Skeleton/SkeletonPost';
 
-const GridPosts = ({ posts, bottomRef, isFetching, clickSelectedPostId }: { posts: PostType[], bottomRef: any, isFetching: boolean, clickSelectedPostId: (postId: string) => void }) => {
+const GridPosts = ({ posts, bottomRef, isFetching, clickSelectedPostId }: { posts: PostType[], bottomRef: any, isFetching: boolean, clickSelectedPostId: (postId: number) => void }) => {
   return (
     <>
       <div className="posts-wrapper">

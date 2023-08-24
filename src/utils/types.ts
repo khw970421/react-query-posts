@@ -1,12 +1,12 @@
 export type PostType = {
-  id: string
+  id: number
   userId: string
   title: string
   body: string
 }
 
 export type PostProps = PostType & {
-  clickSelectedPostId: (postId: string) => void
+  clickSelectedPostId: (postId: number) => void
 }
 
 export type PagesPostType = {

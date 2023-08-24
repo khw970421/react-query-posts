@@ -22,7 +22,7 @@ class HttpClient {
     )
   }
 
-  getPosts(postId: string) {
+  getPosts(postId: number) {
     return this.axios.get(`/posts/${postId}`)
   }
 
@@ -30,7 +30,7 @@ class HttpClient {
     return this.axios.get(`/posts?_start=${start}&_limit=${limit}`)
   }
 
-  getComments(postId: string) {
+  getComments(postId: number) {
     return this.axios.get(`comments?postId=${postId}`)
   }
 }
